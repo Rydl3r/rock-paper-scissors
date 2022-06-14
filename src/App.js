@@ -1,66 +1,107 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 function App() {
-
-  const [userScore, setUserScore] = useState(0)
-  const [compScore, setCompScore] = useState(0)
-  const [message, setMessage] = useState("Let's Play!")
+  const [userScore, setUserScore] = useState(0);
+  const [compScore, setCompScore] = useState(0);
+  const [message, setMessage] = useState("Let's Play!");
 
   const game = (userChoice) => {
-    let possibleComp = ["rock", "paper", "scissors"]
-    let compChoice = possibleComp[Math.floor(Math.random() * possibleComp.length)]
+    let possibleComp = ["rock", "paper", "scissors"];
+    let compChoice =
+      possibleComp[Math.floor(Math.random() * possibleComp.length)];
 
     if (compChoice === userChoice) {
-      setMessage(`You picked ${userChoice}, computer picked ${compChoice}. It's a draw!`)
+      setMessage(
+        `You picked ${userChoice}, computer picked ${compChoice}. It's a draw!`
+      );
     } else if (userChoice === "rock" && compChoice === "paper") {
-      setMessage(`You picked ${userChoice}, computer picked ${compChoice}. Computer wins!`)
-      setCompScore(compScore + 1)
+      setMessage(
+        `You picked ${userChoice}, computer picked ${compChoice}. Computer wins!`
+      );
+      setCompScore(compScore + 1);
     } else if (userChoice === "rock" && compChoice === "scissors") {
-      setMessage(`You picked ${userChoice}, computer picked ${compChoice}. You win!`)
-      setUserScore(userScore + 1)
+      setMessage(
+        `You picked ${userChoice}, computer picked ${compChoice}. You win!`
+      );
+      setUserScore(userScore + 1);
     } else if (userChoice === "paper" && compChoice === "rock") {
-      setMessage(`You picked ${userChoice}, computer picked ${compChoice}. You win!`)
-      setUserScore(userScore + 1)
+      setMessage(
+        `You picked ${userChoice}, computer picked ${compChoice}. You win!`
+      );
+      setUserScore(userScore + 1);
     } else if (userChoice === "paper" && compChoice === "scissors") {
-      setMessage(`You picked ${userChoice}, computer picked ${compChoice}. Computer wins!`)
-      setCompScore(compScore + 1)
+      setMessage(
+        `You picked ${userChoice}, computer picked ${compChoice}. Computer wins!`
+      );
+      setCompScore(compScore + 1);
     } else if (userChoice === "scissors" && compChoice === "rock") {
-      setMessage(`You picked ${userChoice}, computer picked ${compChoice}. Computer wins!`)
-      setCompScore(compScore + 1)
+      setMessage(
+        `You picked ${userChoice}, computer picked ${compChoice}. Computer wins!`
+      );
+      setCompScore(compScore + 1);
     } else if (userChoice === "scissors" && compChoice === "paper") {
-      setMessage(`You picked ${userChoice}, computer picked ${compChoice}. You win!`)
-      setUserScore(userScore + 1)
+      setMessage(
+        `You picked ${userChoice}, computer picked ${compChoice}. You win!`
+      );
+      setUserScore(userScore + 1);
     }
-  }
+  };
 
   return (
     <div className="App">
-      <header className="heroTitle"><h1>Rock Paper Scissors</h1></header>
+      <header className="heroTitle">
+        <h1>Rock Paper Scissors</h1>
+      </header>
 
       <div className="score-board">
-        <div id="user-label" className="badge">user</div>
-        <div id="computer-label" className="badge">comp</div>
-        <span id="user-score">{userScore}</span> : <span id="computer-score">{compScore}</span>
+        <div id="user-label" className="badge">
+          user
+        </div>
+        <div id="computer-label" className="badge">
+          comp
+        </div>
+        <span id="user-score">{userScore}</span> :{" "}
+        <span id="computer-score">{compScore}</span>
       </div>
 
-      <div className="result"><p>{message}</p></div>
+      <div className="result">
+        <p>{message}</p>
+      </div>
 
       <div className="choices">
-        <div id="rock" className="choice" onClick={() => { game("rock") }}>
+        <div
+          id="rock"
+          className="choice"
+          onClick={() => {
+            game("rock");
+          }}
+        >
           <img
             width="48"
             height="48"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKfSURBVGhD7ZjJy81RGIA/GaPMItPOglhJFqzIEDZIypBhoZQkfYXwB1BCFhZ2UqSQsqCUJHMyZWnKkFhQyDw8z/nu6XeTm+m+9/Pdfk89fb/3/W7nnPeec+8957SUlJSUlDQj/bB722PHoBt2antMLMG7+A0/42kci5n/rrjpeBU/4Rs8jJvRAvRj1fML9H8W+AU/4BEcgu3KfPyKDvId+s7nQesG7IpD8WIll61+/R3sgtILq2e2IeSlsxUdyEA8Vck9weoBzULzFj4PO6Ovv4Hm9+ODyvN7PIa+AeEMQDt9maKCyWj+VooKauVXo/nsa3TZ+WyReabCGIl29jBFBePQfK1CzqWoYA6a11UmYBjeQ3Mu31BqFTIKzV9LUcEkNP9jIbnAx1i9FDeh+Z0pCqRWIQ5mPU5NUYG/J5fRAVaTCzmfooKFaP5QigKpVcifMhiv4NoUFcxG2z+RokDqVUgtGlbIcGyKQvpgUxQyCDt8IVPwPtqRfyMIL2QivkU7eYpLMYLQQnqjg7eDA+gGL4rQQlrRxs+im75IQgu5hDY+LUWxhBbiIcltuGeMaMIK8fNhw69SFE9YIZ4LnA1txHk7dGk9Qhsfk6JYQgvxYsHG16UoltBCFqGN38ToC4LQQnriM7SDuSYCCS1E1qAdXMfIWcln+eMpCsBvrHxtEzkrK9A+9qUoiOUYPSs70D68mQzDfZa3g1Gz4m9WnvUJJiKxADvyYOVpsZ54EWHbtzH62zFxBu3wKPYwUQe8HvJy23ZnmmgEI/A52ukF/JdffDeizoT3vra3HRvKaMzr2X3YSdyCi3HBb7gSd6NL1DZ0G0afd35KX9yD+d38W90xzMB2pz8uw114EN2b/cq9uBHHY0M+2CUlJSUldaSl5Tv4zOmPUWh7YwAAAABJRU5ErkJggg=="
           />
         </div>
-        <div id="paper" className="choice" onClick={() => { game("paper") }}>
+        <div
+          id="paper"
+          className="choice"
+          onClick={() => {
+            game("paper");
+          }}
+        >
           <img
             width="48"
             height="48"
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAALqSURBVGhD7ZlL6A1RHMevt5BHHnllgZL3TikkQpHHwsZjQVjYyiMrZYEsiIV3NmSDhUd/VixsbAhFeYfyWFD8Q17x+c6Zc5s7Hf1dM2fm3JpPfZpzbt3bfO+c38w5Z2oVFa3JGByPnaNeCzIOb+Pv2Cc4DVuKHngfL+AoHILH8Q0OwOAZFB9n4nfsG/UMXfE1rsVtqJCHcCoGQSfcjB9QQ+glnsEXmOYG/kINs33Yht9wHpbORvyE63ASbsEf+Lcgj7F31DPsxUemWS4PUCef5DC6guxEDa0kE1FXcmDUKxENldmmWWc0LjLNDtHNQEF0LBWdxAzTrDMFd5tmA5twjmnWSQbpFVsKriC63S41zQbmoh6QSWyQq/gTVV/nsfCh5grSDV1DZTgmC13YIHdQt215F89hobiCzMIrptnAEVxtmnVskORv6Pu6MoUOM1eQrNhwrqvqDVeQZopd05lT8dESTJBmil2z4vXx0RJMkGaKXYyNj5ZggjRT7CroV/HREkyQrAQTpCr2mGCCVMUek3uQLqiTXIOLsT+mcQXJSq5BpuND1A9qra01eDtuRS1vLUEHmY9f8BiqcEVP1JVRmINowwQd5BJqM2Fw1GtEJ/0ZtXkggg6iwruJWhf00wcptLRVmF0YdBChPap7qJ2P5B3FouH3FYMPIkbiU7yM3fVBioWofanggwg9rN7iaXRtRC/DvPd0vQQRk1F3seVRzz/egogDqJrRQ9I3XoMMRW2Nboh6fvEaRGxH1Utyl90H3oPo6f4M90c9f3gPIhagdgTT+715MgEVxE6PvKEXNJp6D4t6+bMEdZdMTk69oGWppjDS9dTPykm8aJr+GYHP8Rr20Qc5oTfA2i7VFKgwVIx623QLNa6zoj9Hb7TORr2C0VRfrwE0gdQbqf+5OnpRuhK1gNMV9jFc/5lV+A4/4nU8gUc7ULWgF6LvUQu2HaiNi9LRP7kCtehynbjLPajvuPYDKioqcqNW+wMkWMAxXNmXsgAAAABJRU5ErkJggg=="
           />
         </div>
-        <div id="scissors" className="choice" onClick={() => { game("scissors") }}>
+        <div
+          id="scissors"
+          className="choice"
+          onClick={() => {
+            game("scissors");
+          }}
+        >
           <img
             width="48"
             height="48"
